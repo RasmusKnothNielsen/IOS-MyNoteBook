@@ -34,6 +34,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         
         // Add the string to the textArray
         textArray.append(userInput)
+        tableView.reloadData()
         
         // Get the date to append to userInput
         //let todaysDate = NSDate();
@@ -50,22 +51,29 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        textArray.append("Hello")
+        textArray.append("How are you?")
         // Set these two to self, so the tableview references the app itself
         tableView.dataSource = self
         tableView.delegate = self
-        // Do any additional setup after loading the view.
         
         // Display the following text at the start of the app
         welcomeLabel.text = stringDisplayed;
     }
     
+    // Function that returns the number of Strings in the array
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return textArray.count;
     }
     
+    // Function that displays the cells in the Table View
+    // If there is two Strings in the array, the following function will be called twice.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        //
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
+        // Assign string from textArray to the cell
         cell?.textLabel?.text = textArray[indexPath.row]
+        // return the cell, and unwrap it with the !, since it is an Optional
         return cell!
     }
 
