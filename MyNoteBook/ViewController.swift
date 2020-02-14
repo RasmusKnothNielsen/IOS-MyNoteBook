@@ -12,13 +12,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // UITableViewDelegate is used when you need to do something to a table
     
     
-    @IBOutlet weak var textLabel: UITextView!
-    @IBOutlet weak var inputLabel: UITextField!
+
+    @IBOutlet weak var inputLabel: UITextView!
     @IBOutlet weak var welcomeLabel: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
     // Initialize empty String array
-    var textArray = [String]()
+    var textArray = [String]();
     
     // Initializing variable to hold the user input in-memory
     var userInput: String = "";
@@ -26,15 +26,28 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Initialize variable to hold a string that has to be displayed on the screen
     var stringDisplayed = "Welcome to MyNoteBook!";
     
+    // Initializing boolean to tell if we are in editing mode
+    var editingRow: Bool = false;
+    var rowThatIsBeingEdited: Int = -1;
+    
     
     @IBAction func UserPressedButton(_ sender: Any) {
         
         // Saving the userInput here, so we can reference it later
         userInput = inputLabel.text!
         
-        // Add the string to the textArray
-        textArray.append(userInput)
-        tableView.reloadData()
+        if editingRow
+        {
+            textArray[rowThatIsBeingEdited] = userInput;
+        }
+        else
+        {
+            // Add the string to the textArray
+            textArray.append(userInput);
+        }
+
+        // Reload data to refresh the Table View
+        tableView.reloadData();
         
         // Get the date to append to userInput
         //let todaysDate = NSDate();
@@ -75,6 +88,26 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.textLabel?.text = textArray[indexPath.row]
         // return the cell, and unwrap it with the !, since it is an Optional
         return cell!
+    }
+    
+    // Function to handle cell pressed, so we can edit it
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        // Transfer the text from the row to the user input field
+        inputLabel.text = textArray[indexPath.row];
+        // Set editing to true
+        editingRow = true;
+        rowThatIsBeingEdited = indexPath.row;
+    }
+    
+    // Function to handle the deletion of a row
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+      if editingStyle == .delete {
+        print("Deleted")
+
+        self.textArray.remove(at: indexPath.row)
+        self.tableView.deleteRows(at: [indexPath], with: .automatic)
+      }
     }
 
 
