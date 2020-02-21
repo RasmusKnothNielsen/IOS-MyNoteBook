@@ -13,7 +13,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // UITableViewDelegate is used when you need to do something to a table
     
     @IBOutlet weak var inputLabel: UITextView!
-    @IBOutlet weak var welcomeLabel: UITextView!
     @IBOutlet weak var tableView: UITableView!
     
     // Initialize empty String array
@@ -31,6 +30,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Variables to hold the file
     let file = "MyNoteBook.txt";
+    
+    // String to contain the item that we press, when shifting to new page
+    var currentItem = ""
     
     
     @IBAction func UserPressedButton(_ sender: Any)
@@ -50,8 +52,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
             textArray.append(userInput);
         }
         
-        // Saving to file
-        saveStringToFile(str: userInput, fileName: file);
+        // Saving array to file
+        saveStringToFile(str: textArray, fileName: file);
         
         // Reading from file
         readStringFromFile(fileName: file);
@@ -71,14 +73,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        textArray.append("Hello")
-        textArray.append("How are you?")
+        // Read data from file
+        let query = readStringFromFile(fileName: file)
+        // Append every string to our notebook
+        for string in query {
+            textArray.append(string)
+        }
         // Set these two to self, so the tableview references the app itself
         tableView.dataSource = self
         tableView.delegate = self
         
         // Display the following text at the start of the app
-        welcomeLabel.text = stringDisplayed;
+        //welcomeLabel.text = stringDisplayed;
     }
     
     // Function that returns the number of Strings in the array
@@ -99,6 +105,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         cell?.textLabel?.text = textArray[indexPath.row]
         // return the cell, and unwrap it with the !, since it is an Optional
         return cell!
+    }
+    
+    // This enables the transition from tableview to the view controller
+    func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
+        currentItem = textArray[indexPath.row]
+        performSegue(withIdentifier: "showDetail", sender: nil)
+    }
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if let viewController = segue.destination as? SecondViewController {
+            viewController.text = currentItem
+        }
     }
     
     // EDIT
@@ -126,13 +144,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
 
     // SAVING
-    func saveStringToFile(str:String, fileName:String)
+    func saveStringToFile(str:[String] , fileName:String)
     {
         // Read the filepath
         let filePath = getDocumentDir().appendingPathComponent(fileName)
+        var savingString: String = ""
+        // Since we want to save several elements from our list, we are going to
+        // make a long string with \n as seperator
+        for string in str {
+            savingString.append(string + "\n")
+        }
         do {
             // Try to write the string to the provided file
-            try str.write(to: filePath, atomically: true, encoding: .utf8)
+            try savingString.write(to: filePath, atomically: true, encoding: .utf8)
             print("OK writing string: \(str)")
         } catch {
             print("error writing string: \(str)")
@@ -141,7 +165,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // READING
     // Where we return a string
-    func readStringFromFile(fileName:String) -> String
+    func readStringFromFile(fileName:String) -> [String]
     {
         // Read the filepath
         let filePath = getDocumentDir().appendingPathComponent(fileName);
@@ -149,16 +173,23 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         {
             // Get the content from the file and save it as string
             let string = try String(contentsOf: filePath, encoding: .utf8);
+            // Since we saved the array as a string with \n seperator, we have to split it
+            var returnArray = string.split(separator: "\n")
+            var result: [String] = []
+            // Each of the strings has to be appended to our array so we can pass it back
+            for string in returnArray {
+                result.append(String(string))
+            }
             print("Read the following from file: \(string)")
             // Return the string
-            return string;
+            return result;
         }
         catch
         {
             print("Error while reading file \(fileName)")
         }
         // If there was an error in reading the file, return "empty"
-        return "empty"
+        return ["empty"]
     }
     
     // Function used to get the correct location on the operating system
