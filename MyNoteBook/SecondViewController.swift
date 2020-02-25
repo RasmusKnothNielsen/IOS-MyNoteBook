@@ -12,11 +12,26 @@ class SecondViewController: UIViewController {
     
     @IBOutlet weak var detailedText: UITextView!
     var text = ""
+    //var arrayIndex: Int = 0
+    
+    let viewController = ViewController()
 
     override func viewDidLoad() {
+        print("Now we are in secondViewController")
         super.viewDidLoad()
-        detailedText.text = text
-        // Do any additional setup after loading the view.
+        detailedText.text = textArray[rowThatIsBeingEdited]
+        print("Row that is being edited: \(rowThatIsBeingEdited)")
+        print()
+    }
+    
+    @IBAction func userPressedSaveButton(_ sender: UIButton) {
+        print("Pressed the save button")
+        print(detailedText.text!)
+        print(rowThatIsBeingEdited)
+        print(textArray)
+        textArray[rowThatIsBeingEdited] = detailedText.text
+        viewController.saveStringToFile(str: textArray, fileName: viewController.file)
+        
     }
     
 

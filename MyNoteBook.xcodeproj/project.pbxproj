@@ -61,11 +61,11 @@
 				59DCB23823F6868B009F4B2D /* AppDelegate.swift */,
 				59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */,
 				59DCB23C23F6868B009F4B2D /* ViewController.swift */,
+				59DCB25224000A77009F4B2D /* SecondViewController.swift */,
 				59DCB23E23F6868B009F4B2D /* Main.storyboard */,
 				59DCB24123F6868B009F4B2D /* Assets.xcassets */,
 				59DCB24323F6868B009F4B2D /* LaunchScreen.storyboard */,
 				59DCB24623F6868B009F4B2D /* Info.plist */,
-				59DCB25224000A77009F4B2D /* SecondViewController.swift */,
 			);
 			path = MyNoteBook;
 			sourceTree = "<group>";

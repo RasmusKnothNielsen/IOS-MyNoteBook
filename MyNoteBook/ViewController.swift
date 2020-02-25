@@ -8,22 +8,26 @@
 
 import UIKit
 
+// Initialize empty String array
+var textArray = [String]();
+var rowThatIsBeingEdited: Int = -1;
+
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     // UITableViewDelegate is used when you need to do something to a table
     
-    @IBOutlet weak var inputLabel: UITextView!
     @IBOutlet weak var tableView: UITableView!
 
     @IBAction func userPressedAddHeadline(_ sender: UIButton) {
         print("Button pressed")
         textArray.append("New Headline!")
         tableView.reloadData()
+        saveStringToFile(str: textArray, fileName: file)
     }
     
     
     // Initialize empty String array
-    var textArray = [String]();
+    //var textArray = [String]();
     
     // Initializing variable to hold the user input in-memory
     var userInput: String = "";
@@ -33,7 +37,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Initializing boolean to tell if we are in editing mode
     var editingRow: Bool = false;
-    var rowThatIsBeingEdited: Int = -1;
+    //var rowThatIsBeingEdited: Int = -1;
     
     // Variables to hold the file
     let file = "MyNoteBook.txt";
@@ -42,16 +46,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     var currentItem = ""
     
     
+    // Pressed Submit button
     @IBAction func UserPressedButton(_ sender: Any)
     {
         
+        // REMOVED BECAUSE FUNCTIONALITY NO LONGER IS NEEDED
         // Saving the userInput here, so we can reference it later
-        userInput = inputLabel.text!
+        //userInput = inputLabel.text!
+        let secondViewController: SecondViewController = SecondViewController()
         
         // Check if we are in editing mode
         if editingRow
         {
-            textArray[rowThatIsBeingEdited] = userInput;
+            textArray[rowThatIsBeingEdited] = secondViewController.detailedText.text;
         }
         else
         {
@@ -71,8 +78,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // Set the editing mode to false, since we are done potentially editing
         editingRow = false;
         
+        // REMOVED BECAUSE FUNCTIONALITY NO LONGER IS NEEDED
         // Set the inputLabel to be empty, to indicate that we are done editing and ready for a new submission.
-        inputLabel.text = "";
+        //inputLabel.text = "";
         
     }
     
@@ -90,8 +98,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         tableView.dataSource = self
         tableView.delegate = self
         
+        tableView.reloadData()
+        
         // Display the following text at the start of the app
         //welcomeLabel.text = stringDisplayed;
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        super.viewDidAppear(animated)
+        tableView.reloadData()
     }
     
     // Function that returns the number of Strings in the array
@@ -117,12 +132,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // This enables the transition from tableview to the view controller
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         currentItem = textArray[indexPath.row]
+        rowThatIsBeingEdited = indexPath.row
         performSegue(withIdentifier: "showDetail", sender: nil)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? SecondViewController {
             viewController.text = currentItem
+            //viewController.arrayIndex = rowThatIsBeingEdited
         }
     }
     
@@ -131,10 +148,16 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath)
     {
         // Transfer the text from the row to the user input field
-        inputLabel.text = textArray[indexPath.row];
+        rowThatIsBeingEdited = indexPath.row;
+        let secondViewController: SecondViewController = SecondViewController()
+        print("Now we are in ViewController")
+        print("Going from tableview into regular view, \(textArray[indexPath.row])")
+        print("IndexPath.row is: \(rowThatIsBeingEdited)")
+        print()
+        secondViewController.text = textArray[rowThatIsBeingEdited];
+        //secondViewController.arrayIndex = rowThatIsBeingEdited
         // Set editing to true
         editingRow = true;
-        rowThatIsBeingEdited = indexPath.row;
     }
     
     // DELETE
@@ -144,7 +167,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       if editingStyle == .delete
       {
         // Remove the String at the given index
-        self.textArray.remove(at: indexPath.row)
+        textArray.remove(at: indexPath.row)
         // Delete the given row from the table view
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
