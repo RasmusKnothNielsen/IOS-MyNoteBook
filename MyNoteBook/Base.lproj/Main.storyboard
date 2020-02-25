@@ -50,7 +50,19 @@
                         <color key="backgroundColor" red="0.24705882352941178" green="0.75686274509803919" blue="0.78823529411764703" alpha="1" colorSpace="calibratedRGB"/>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
                     </view>
-                    <navigationItem key="navigationItem" title="Notes" largeTitleDisplayMode="always" id="dbk-Kf-Ffh"/>
+                    <navigationItem key="navigationItem" title="Notes" largeTitleDisplayMode="never" id="dbk-Kf-Ffh">
+                        <barButtonItem key="rightBarButtonItem" style="plain" id="XV6-uW-RFD">
+                            <button key="customView" opaque="NO" contentMode="scaleToFill" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="Kwl-Kk-qpt">
+                                <rect key="frame" x="302" y="0.0" width="92" height="44"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="29"/>
+                                <state key="normal" title="+"/>
+                                <connections>
+                                    <action selector="userPressedAddHeadline:" destination="BYZ-38-t0r" eventType="touchUpInside" id="73a-UY-utF"/>
+                                </connections>
+                            </button>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
                         <outlet property="inputLabel" destination="nz0-do-yrX" id="O5y-kk-yZX"/>
                         <outlet property="tableView" destination="U7e-k6-Cw4" id="3jO-78-FBv"/>

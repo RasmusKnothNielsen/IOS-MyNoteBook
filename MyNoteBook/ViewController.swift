@@ -14,6 +14,13 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     @IBOutlet weak var inputLabel: UITextView!
     @IBOutlet weak var tableView: UITableView!
+
+    @IBAction func userPressedAddHeadline(_ sender: UIButton) {
+        print("Button pressed")
+        textArray.append("New Headline!")
+        tableView.reloadData()
+    }
+    
     
     // Initialize empty String array
     var textArray = [String]();
