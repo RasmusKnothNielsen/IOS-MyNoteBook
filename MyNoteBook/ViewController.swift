@@ -26,8 +26,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     }
     
     
-    // Initialize empty String array
-    //var textArray = [String]();
     
     // Initializing variable to hold the user input in-memory
     var userInput: String = "";
@@ -37,53 +35,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     
     // Initializing boolean to tell if we are in editing mode
     var editingRow: Bool = false;
-    //var rowThatIsBeingEdited: Int = -1;
     
     // Variables to hold the file
     let file = "MyNoteBook.txt";
     
     // String to contain the item that we press, when shifting to new page
     var currentItem = ""
-    
-    
-    // Pressed Submit button
-    @IBAction func UserPressedButton(_ sender: Any)
-    {
-        
-        // REMOVED BECAUSE FUNCTIONALITY NO LONGER IS NEEDED
-        // Saving the userInput here, so we can reference it later
-        //userInput = inputLabel.text!
-        let secondViewController: SecondViewController = SecondViewController()
-        
-        // Check if we are in editing mode
-        if editingRow
-        {
-            textArray[rowThatIsBeingEdited] = secondViewController.detailedText.text;
-        }
-        else
-        {
-            // Add the string to the textArray
-            textArray.append(userInput);
-        }
-        
-        // Saving array to file
-        saveStringToFile(str: textArray, fileName: file);
-        
-        // Reading from file
-        readStringFromFile(fileName: file);
-
-        // Reload data to refresh the Table View
-        tableView.reloadData();
-        
-        // Set the editing mode to false, since we are done potentially editing
-        editingRow = false;
-        
-        // REMOVED BECAUSE FUNCTIONALITY NO LONGER IS NEEDED
-        // Set the inputLabel to be empty, to indicate that we are done editing and ready for a new submission.
-        //inputLabel.text = "";
-        
-    }
-    
     
     override func viewDidLoad()
     {
@@ -139,7 +96,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? SecondViewController {
             viewController.text = currentItem
-            //viewController.arrayIndex = rowThatIsBeingEdited
         }
     }
     
@@ -155,7 +111,6 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("IndexPath.row is: \(rowThatIsBeingEdited)")
         print()
         secondViewController.text = textArray[rowThatIsBeingEdited];
-        //secondViewController.arrayIndex = rowThatIsBeingEdited
         // Set editing to true
         editingRow = true;
     }
