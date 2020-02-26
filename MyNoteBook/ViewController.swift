@@ -90,7 +90,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         currentItem = textArray[indexPath.row]
         rowThatIsBeingEdited = indexPath.row
-        performSegue(withIdentifier: "showDetail", sender: nil)
+        performSegue(withIdentifier: "showDetail", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
@@ -111,6 +111,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("IndexPath.row is: \(rowThatIsBeingEdited)")
         print()
         secondViewController.text = textArray[rowThatIsBeingEdited];
+        performSegue(withIdentifier: "showDetail", sender: nil)
         // Set editing to true
         editingRow = true;
     }
