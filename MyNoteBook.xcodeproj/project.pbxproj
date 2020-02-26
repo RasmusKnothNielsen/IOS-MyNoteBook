@@ -15,9 +15,12 @@
 		59DCB24523F6868B009F4B2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59DCB24323F6868B009F4B2D /* LaunchScreen.storyboard */; };
 		59DCB25324000A77009F4B2D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DCB25224000A77009F4B2D /* SecondViewController.swift */; };
 		59FB101624066BB400DED695 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59FB101524066BB400DED695 /* GoogleService-Info.plist */; };
+		D06739A728C929DDDC86B53A /* Pods_MyNoteBook.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 287FE8A568A73F0F0EBF37AC /* Pods_MyNoteBook.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		287FE8A568A73F0F0EBF37AC /* Pods_MyNoteBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNoteBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNoteBook.debug.xcconfig"; path = "Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook.debug.xcconfig"; sourceTree = "<group>"; };
 		59DCB23523F6868B009F4B2D /* MyNoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59DCB23823F6868B009F4B2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -28,6 +31,7 @@
 		59DCB24623F6868B009F4B2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59DCB25224000A77009F4B2D /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
 		59FB101524066BB400DED695 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
+		D3994649633D3190CA0B65B2 /* Pods-MyNoteBook.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNoteBook.release.xcconfig"; path = "Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -35,17 +39,28 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				D06739A728C929DDDC86B53A /* Pods_MyNoteBook.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		4BFA5405D0F464B55ACD8635 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				287FE8A568A73F0F0EBF37AC /* Pods_MyNoteBook.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
 		59DCB22C23F6868B009F4B2D = {
 			isa = PBXGroup;
 			children = (
 				59DCB23723F6868B009F4B2D /* MyNoteBook */,
 				59DCB23623F6868B009F4B2D /* Products */,
+				A5013D9C1341014619D8DD51 /* Pods */,
+				4BFA5405D0F464B55ACD8635 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -73,6 +88,16 @@
 			path = MyNoteBook;
 			sourceTree = "<group>";
 		};
+		A5013D9C1341014619D8DD51 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */,
+				D3994649633D3190CA0B65B2 /* Pods-MyNoteBook.release.xcconfig */,
+			);
+			name = Pods;
+			path = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -80,9 +105,11 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 59DCB24923F6868B009F4B2D /* Build configuration list for PBXNativeTarget "MyNoteBook" */;
 			buildPhases = (
+				7380608F516C670CF9010AE5 /* [CP] Check Pods Manifest.lock */,
 				59DCB23123F6868B009F4B2D /* Sources */,
 				59DCB23223F6868B009F4B2D /* Frameworks */,
 				59DCB23323F6868B009F4B2D /* Resources */,
+				9BA0249B183EA29EA2493F6F /* [CP] Embed Pods Frameworks */,
 			);
 			buildRules = (
 			);
@@ -139,6 +166,48 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		7380608F516C670CF9010AE5 /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+			);
+			inputPaths = (
+				"${PODS_PODFILE_DIR_PATH}/Podfile.lock",
+				"${PODS_ROOT}/Manifest.lock",
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputFileListPaths = (
+			);
+			outputPaths = (
+				"$(DERIVED_FILE_DIR)/Pods-MyNoteBook-checkManifestLockResult.txt",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n# This output is used by Xcode 'outputs' to avoid re-running this script phase.\necho \"SUCCESS\" > \"${SCRIPT_OUTPUT_FILE_0}\"\n";
+			showEnvVarsInLog = 0;
+		};
+		9BA0249B183EA29EA2493F6F /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook-frameworks-${CONFIGURATION}-input-files.xcfilelist",
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputFileListPaths = (
+				"${PODS_ROOT}/Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook-frameworks-${CONFIGURATION}-output-files.xcfilelist",
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${PODS_ROOT}/Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		59DCB23123F6868B009F4B2D /* Sources */ = {
@@ -290,6 +359,7 @@
 		};
 		59DCB24A23F6868B009F4B2D /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
@@ -308,6 +378,7 @@
 		};
 		59DCB24B23F6868B009F4B2D /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = D3994649633D3190CA0B65B2 /* Pods-MyNoteBook.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
