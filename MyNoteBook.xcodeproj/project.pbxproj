@@ -14,6 +14,7 @@
 		59DCB24223F6868B009F4B2D /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 59DCB24123F6868B009F4B2D /* Assets.xcassets */; };
 		59DCB24523F6868B009F4B2D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 59DCB24323F6868B009F4B2D /* LaunchScreen.storyboard */; };
 		59DCB25324000A77009F4B2D /* SecondViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DCB25224000A77009F4B2D /* SecondViewController.swift */; };
+		59FB101624066BB400DED695 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 59FB101524066BB400DED695 /* GoogleService-Info.plist */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -26,6 +27,7 @@
 		59DCB24423F6868B009F4B2D /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		59DCB24623F6868B009F4B2D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		59DCB25224000A77009F4B2D /* SecondViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecondViewController.swift; sourceTree = "<group>"; };
+		59FB101524066BB400DED695 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../../../../Downloads/GoogleService-Info.plist"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -66,6 +68,7 @@
 				59DCB24123F6868B009F4B2D /* Assets.xcassets */,
 				59DCB24323F6868B009F4B2D /* LaunchScreen.storyboard */,
 				59DCB24623F6868B009F4B2D /* Info.plist */,
+				59FB101524066BB400DED695 /* GoogleService-Info.plist */,
 			);
 			path = MyNoteBook;
 			sourceTree = "<group>";
@@ -129,6 +132,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				59DCB24523F6868B009F4B2D /* LaunchScreen.storyboard in Resources */,
+				59FB101624066BB400DED695 /* GoogleService-Info.plist in Resources */,
 				59DCB24223F6868B009F4B2D /* Assets.xcassets in Resources */,
 				59DCB24023F6868B009F4B2D /* Main.storyboard in Resources */,
 			);
