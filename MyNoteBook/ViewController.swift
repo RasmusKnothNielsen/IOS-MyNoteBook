@@ -15,16 +15,15 @@ var rowThatIsBeingEdited: Int = -1;
 
 
 
-class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
-{
+class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate {
     // UITableViewDelegate is used when you need to do something to a table
-    
     @IBOutlet weak var tableView: UITableView!
     
 
     @IBAction func userPressedAddHeadline(_ sender: UIButton) {
         print("Button pressed")
-        Storage.addItem(str: "New Note!")
+        //Storage.addItem(str: "New Note!")
+        CloudStorage.createNote(head: "New Note", body: "New Body")
         tableView.reloadData()
     }
     
@@ -43,13 +42,14 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let file = "MyNoteBook.txt";
     
     // String to contain the item that we press, when shifting to new page
-    var currentItem = ""
+    var currentNote: Note = Note(id: "",head: "",body: "");
     
     override func viewDidLoad()
     {
         super.viewDidLoad()
         // Read data from file
-        let query = Storage.read()
+        //let query = Storage.read()
+        CloudStorage.startListener()
         // Append every string to our notebook
         //for string in query {
         //    Storage.addItem(str: string)
@@ -72,7 +72,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Function that returns the number of Strings in the array
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return Storage.count()
+        //return Storage.count()
+        return CloudStorage.count()
     }
     
     // Function that displays the cells in the Table View
@@ -84,7 +85,9 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // cells, without filling out the system memory unnecessary.
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
         // Assign string from textArray to the cell
-        cell?.textLabel?.text = Storage.getItem(index: indexPath.row)
+        //cell?.textLabel?.text = Storage.getItem(index: indexPath.row)
+        let note = CloudStorage.getNote(index: indexPath.row)
+        cell?.textLabel?.text = note.head
         // return the cell, and unwrap it with the !, since it is an Optional
         return cell!
     }
@@ -92,14 +95,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // This enables the transition from tableview to the view controller
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
         //currentItem = textArray[indexPath.row]
-        currentItem = Storage.getItem(index: indexPath.row)
+        //currentItem = Storage.getItem(index: indexPath.row)
+        currentNote = CloudStorage.getNote(index: indexPath.row)
         rowThatIsBeingEdited = indexPath.row
         performSegue(withIdentifier: "showDetail", sender: self)
     }
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if let viewController = segue.destination as? SecondViewController {
-            viewController.text = currentItem
+            viewController.text = currentNote.head
         }
     }
     
@@ -111,10 +115,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         rowThatIsBeingEdited = indexPath.row;
         let secondViewController: SecondViewController = SecondViewController()
         print("Now we are in ViewController")
-        print("Going from tableview into regular view, \(Storage.getItem(index: indexPath.row))")
+        //print("Going from tableview into regular view, \(Storage.getItem(index: indexPath.row))")
         print("IndexPath.row is: \(rowThatIsBeingEdited)")
         print()
-        secondViewController.text = Storage.getItem(index: rowThatIsBeingEdited);
+        //secondViewController.text = Storage.getItem(index: rowThatIsBeingEdited);
+        var note = CloudStorage.getNote(index: rowThatIsBeingEdited)
+        secondViewController.text = note.head
         performSegue(withIdentifier: "showDetail", sender: nil)
         // Set editing to true
         editingRow = true;
@@ -128,7 +134,8 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       {
         // Remove the String at the given index
         //textArray.remove(at: indexPath.row)
-        Storage.remove(index: indexPath.row)
+        //Storage.remove(index: indexPath.row)
+        CloudStorage.deleteNote(id: String(indexPath.row))
         // Delete the given row from the table view
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
