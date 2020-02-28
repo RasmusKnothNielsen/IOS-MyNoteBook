@@ -66,9 +66,10 @@ class CloudStorage {
     }
     
     // Delete
-    static func deleteNote(id:String){
+    static func deleteNote(index: Int, id:String){
         // Document Reference
         let docRef = db.collection(collectionName).document(id)
+        list.remove(at: index)
         docRef.delete()
     }
     
@@ -79,6 +80,7 @@ class CloudStorage {
     
     // Get note from List
     static func getNote(index: Int) -> Note {
+        print("Index: \(index)")
         return list[index]
     }
     

@@ -14,16 +14,11 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var headText: UITextView!
     @IBOutlet weak var bodyText: UITextView!
     
-    
     var text = ""
-    //var arrayIndex: Int = 0
-    
-    //let viewController = ViewController()
 
     override func viewDidLoad() {
         print("Now we are in secondViewController")
         super.viewDidLoad()
-        //headText.text = Storage.getItem(index: rowThatIsBeingEdited)
         let newNote = CloudStorage.getNote(index: rowThatIsBeingEdited)
         headText.text = newNote.head
         bodyText.text = newNote.body
@@ -35,12 +30,6 @@ class SecondViewController: UIViewController {
         print("Pressed the save button")
         print(headText.text!)
         print(rowThatIsBeingEdited)
-        //print(textArray)
-        //textArray[rowThatIsBeingEdited] = detailedText.text
-        //Storage.addItem(str: detailedText.text)
-        //viewController.saveStringToFile(str: textArray, fileName: viewController.file)
-        //Storage.update(str: headText.text, index: rowThatIsBeingEdited)
-        
         let newNote = CloudStorage.getNote(index: rowThatIsBeingEdited)
         CloudStorage.updateNote(index: rowThatIsBeingEdited, head: headText.text, body: bodyText.text)
         
