@@ -19,7 +19,7 @@ class SecondViewController: UIViewController {
     override func viewDidLoad() {
         print("Now we are in secondViewController")
         super.viewDidLoad()
-        detailedText.text = textArray[rowThatIsBeingEdited]
+        detailedText.text = Storage.getItem(index: rowThatIsBeingEdited)
         print("Row that is being edited: \(rowThatIsBeingEdited)")
         print()
     }
@@ -28,9 +28,11 @@ class SecondViewController: UIViewController {
         print("Pressed the save button")
         print(detailedText.text!)
         print(rowThatIsBeingEdited)
-        print(textArray)
-        textArray[rowThatIsBeingEdited] = detailedText.text
-        viewController.saveStringToFile(str: textArray, fileName: viewController.file)
+        //print(textArray)
+        //textArray[rowThatIsBeingEdited] = detailedText.text
+        //Storage.addItem(str: detailedText.text)
+        //viewController.saveStringToFile(str: textArray, fileName: viewController.file)
+        Storage.update(str: detailedText.text, index: rowThatIsBeingEdited)
         
     }
     

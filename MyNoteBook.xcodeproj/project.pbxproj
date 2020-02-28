@@ -3,10 +3,11 @@
 	archiveVersion = 1;
 	classes = {
 	};
-	objectVersion = 50;
+	objectVersion = 51;
 	objects = {
 
 /* Begin PBXBuildFile section */
+		5950090A240905D100C33181 /* Storage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59500909240905D100C33181 /* Storage.swift */; };
 		59DCB23923F6868B009F4B2D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DCB23823F6868B009F4B2D /* AppDelegate.swift */; };
 		59DCB23B23F6868B009F4B2D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */; };
 		59DCB23D23F6868B009F4B2D /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59DCB23C23F6868B009F4B2D /* ViewController.swift */; };
@@ -21,6 +22,7 @@
 /* Begin PBXFileReference section */
 		287FE8A568A73F0F0EBF37AC /* Pods_MyNoteBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNoteBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNoteBook.debug.xcconfig"; path = "Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook.debug.xcconfig"; sourceTree = "<group>"; };
+		59500909240905D100C33181 /* Storage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Storage.swift; sourceTree = "<group>"; };
 		59DCB23523F6868B009F4B2D /* MyNoteBook.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = MyNoteBook.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		59DCB23823F6868B009F4B2D /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -54,6 +56,14 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		59500908240905A100C33181 /* Storage */ = {
+			isa = PBXGroup;
+			children = (
+				59500909240905D100C33181 /* Storage.swift */,
+			);
+			path = Storage;
+			sourceTree = "<group>";
+		};
 		59DCB22C23F6868B009F4B2D = {
 			isa = PBXGroup;
 			children = (
@@ -75,6 +85,7 @@
 		59DCB23723F6868B009F4B2D /* MyNoteBook */ = {
 			isa = PBXGroup;
 			children = (
+				59500908240905A100C33181 /* Storage */,
 				59DCB23823F6868B009F4B2D /* AppDelegate.swift */,
 				59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */,
 				59DCB23C23F6868B009F4B2D /* ViewController.swift */,
@@ -94,7 +105,6 @@
 				3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */,
 				D3994649633D3190CA0B65B2 /* Pods-MyNoteBook.release.xcconfig */,
 			);
-			name = Pods;
 			path = Pods;
 			sourceTree = "<group>";
 		};
@@ -218,6 +228,7 @@
 				59DCB23D23F6868B009F4B2D /* ViewController.swift in Sources */,
 				59DCB23923F6868B009F4B2D /* AppDelegate.swift in Sources */,
 				59DCB23B23F6868B009F4B2D /* SceneDelegate.swift in Sources */,
+				5950090A240905D100C33181 /* Storage.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

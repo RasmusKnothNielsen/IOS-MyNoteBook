@@ -8,21 +8,24 @@
 
 import UIKit
 
+
 // Initialize empty String array
-var textArray = [String]();
+//var textArray = [String]();
 var rowThatIsBeingEdited: Int = -1;
+
+
 
 class ViewController: UIViewController, UITableViewDataSource, UITableViewDelegate
 {
     // UITableViewDelegate is used when you need to do something to a table
     
     @IBOutlet weak var tableView: UITableView!
+    
 
     @IBAction func userPressedAddHeadline(_ sender: UIButton) {
         print("Button pressed")
-        textArray.append("New Headline!")
+        Storage.addItem(str: "New Note!")
         tableView.reloadData()
-        saveStringToFile(str: textArray, fileName: file)
     }
     
     
@@ -46,11 +49,11 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         super.viewDidLoad()
         // Read data from file
-        let query = readStringFromFile(fileName: file)
+        let query = Storage.read()
         // Append every string to our notebook
-        for string in query {
-            textArray.append(string)
-        }
+        //for string in query {
+        //    Storage.addItem(str: string)
+        //}
         // Set these two to self, so the tableview references the app itself
         tableView.dataSource = self
         tableView.delegate = self
@@ -69,7 +72,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // Function that returns the number of Strings in the array
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int
     {
-        return textArray.count;
+        return Storage.count()
     }
     
     // Function that displays the cells in the Table View
@@ -81,14 +84,15 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         // cells, without filling out the system memory unnecessary.
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
         // Assign string from textArray to the cell
-        cell?.textLabel?.text = textArray[indexPath.row]
+        cell?.textLabel?.text = Storage.getItem(index: indexPath.row)
         // return the cell, and unwrap it with the !, since it is an Optional
         return cell!
     }
     
     // This enables the transition from tableview to the view controller
     func tableView(_ tableView: UITableView, didDeselectRowAt indexPath: IndexPath) {
-        currentItem = textArray[indexPath.row]
+        //currentItem = textArray[indexPath.row]
+        currentItem = Storage.getItem(index: indexPath.row)
         rowThatIsBeingEdited = indexPath.row
         performSegue(withIdentifier: "showDetail", sender: self)
     }
@@ -107,10 +111,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         rowThatIsBeingEdited = indexPath.row;
         let secondViewController: SecondViewController = SecondViewController()
         print("Now we are in ViewController")
-        print("Going from tableview into regular view, \(textArray[indexPath.row])")
+        print("Going from tableview into regular view, \(Storage.getItem(index: indexPath.row))")
         print("IndexPath.row is: \(rowThatIsBeingEdited)")
         print()
-        secondViewController.text = textArray[rowThatIsBeingEdited];
+        secondViewController.text = Storage.getItem(index: rowThatIsBeingEdited);
         performSegue(withIdentifier: "showDetail", sender: nil)
         // Set editing to true
         editingRow = true;
@@ -123,59 +127,19 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
       if editingStyle == .delete
       {
         // Remove the String at the given index
-        textArray.remove(at: indexPath.row)
+        //textArray.remove(at: indexPath.row)
+        Storage.remove(index: indexPath.row)
         // Delete the given row from the table view
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
     }
 
-    // SAVING
-    func saveStringToFile(str:[String] , fileName:String)
-    {
-        // Read the filepath
-        let filePath = getDocumentDir().appendingPathComponent(fileName)
-        var savingString: String = ""
-        // Since we want to save several elements from our list, we are going to
-        // make a long string with \n as seperator
-        for string in str {
-            savingString.append(string + "\n")
-        }
-        do {
-            // Try to write the string to the provided file
-            try savingString.write(to: filePath, atomically: true, encoding: .utf8)
-            print("OK writing string: \(str)")
-        } catch {
-            print("error writing string: \(str)")
-        }
-    }
     
     // READING
-    // Where we return a string
+    // Where we return a list of strings
     func readStringFromFile(fileName:String) -> [String]
     {
-        // Read the filepath
-        let filePath = getDocumentDir().appendingPathComponent(fileName);
-        do
-        {
-            // Get the content from the file and save it as string
-            let string = try String(contentsOf: filePath, encoding: .utf8);
-            // Since we saved the array as a string with \n seperator, we have to split it
-            var returnArray = string.split(separator: "\n")
-            var result: [String] = []
-            // Each of the strings has to be appended to our array so we can pass it back
-            for string in returnArray {
-                result.append(String(string))
-            }
-            print("Read the following from file: \(string)")
-            // Return the string
-            return result;
-        }
-        catch
-        {
-            print("Error while reading file \(fileName)")
-        }
-        // If there was an error in reading the file, return "empty"
-        return ["empty"]
+        return Storage.read()
     }
     
     // Function used to get the correct location on the operating system
