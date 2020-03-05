@@ -41,13 +41,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     override func viewDidLoad()
     {
         super.viewDidLoad()
-        // Read data from file
-        //let query = Storage.read()
         CloudStorage.startListener()
-        // Append every string to our notebook
-        //for string in query {
-        //    Storage.addItem(str: string)
-        //}
         // Set these two to self, so the tableview references the app itself
         tableView.dataSource = self
         tableView.delegate = self

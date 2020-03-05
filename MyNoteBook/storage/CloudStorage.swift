@@ -30,6 +30,15 @@ class CloudStorage {
         
     }
     
+    // Get notes from firebase at startup
+    static func getNotes() {
+        db.collection(collectionName).getDocuments(completion: { (snapshot, error) in
+            for note in (snapshot!.documents) {
+                print(note.data())
+            }
+        })
+    }
+    
     // Read
     static func startListener() {
         // Continually listen for changes in the database.
