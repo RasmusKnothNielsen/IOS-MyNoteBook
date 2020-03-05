@@ -19,6 +19,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
         
         // Configure the Firebase
         FirebaseApp.configure()
+        CloudStorage.getNotes()
         return true
     }
 

@@ -33,8 +33,18 @@ class CloudStorage {
     // Get notes from firebase at startup
     static func getNotes() {
         db.collection(collectionName).getDocuments(completion: { (snapshot, error) in
-            for note in (snapshot!.documents) {
-                print(note.data())
+            if error == nil {
+                self.list.removeAll()
+                for note in (snapshot!.documents) {
+                    // Get a map of data from the note
+                    let map = note.data()
+                    let head = map["head"] as! String
+                    let body = map["body"] as! String
+                    // Creating the new node object
+                    let newNote = Note(id: note.documentID, head: head, body: body)
+                    // Add it to the list
+                    self.list.append(newNote)
+                }
             }
         })
     }

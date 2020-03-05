@@ -99,7 +99,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("Now we are in ViewController")
         print("IndexPath.row is: \(rowThatIsBeingEdited)")
         print()
-        var note = CloudStorage.getNote(index: rowThatIsBeingEdited)
+        let note = CloudStorage.getNote(index: rowThatIsBeingEdited)
         secondViewController.text = note.head
         performSegue(withIdentifier: "showDetail", sender: nil)
         // Set editing to true
@@ -112,20 +112,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
       if editingStyle == .delete
       {
-        var note = CloudStorage.getNote(index: indexPath.row)
+        let note = CloudStorage.getNote(index: indexPath.row)
         
         CloudStorage.deleteNote(index: indexPath.row, id: note.id)
         // Delete the given row from the table view
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
-    }
-
-    
-    // READING
-    // Where we return a list of strings
-    func readStringFromFile(fileName:String) -> [String]
-    {
-        return Storage.read()
     }
     
     // Function used to get the correct location on the operating system
