@@ -118,7 +118,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
       if editingStyle == .delete
       {
-        var note = CloudStorage.getNote(index: rowThatIsBeingEdited)
+        var note = CloudStorage.getNote(index: indexPath.row)
         
         CloudStorage.deleteNote(index: indexPath.row, id: note.id)
         // Delete the given row from the table view
