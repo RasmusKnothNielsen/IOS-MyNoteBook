@@ -40,30 +40,19 @@ class CloudStorage {
         let storageRef = storage.reference()
         // Create a reference for image
         let imageRef = storageRef.child(name + ".jpg")
-        
+        // convert the image to jpeg data end do not compress it
         let img = image.jpegData(compressionQuality: 1.0)!
-        
+        // Configure the meta data to define that the img files is images and of the jpeg type
         let meta = StorageMetadata()
         meta.contentType = "image/jpeg"
         
         _ = imageRef.putData(img, metadata: meta) { (metadata, error) in
-            guard let metadata = metadata else {
+            guard metadata != nil else {
                 // Something went wrong
-                print("Meta data went wrong")
+                print("There is something wrong with the metadata provided with the picture being uploaded")
                 return
             }
-            // Metadata contains file metadata such as size, content-type
-            _ = metadata.size
-            // You can also access to download URL after upload.
-            storageRef.downloadURL { (url, error) in
-                guard url != nil else {
-                    // Something went wrong
-                    print("URL went wrong")
-                    return
-                }
-            }
         }
-        
     }
     
     // CRUD

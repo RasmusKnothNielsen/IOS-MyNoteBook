@@ -264,8 +264,6 @@ extension AttachmentHandler: UIImagePickerControllerDelegate, UINavigationContro
                 break
             case .cancelled:
                 break
-            @unknown default:
-                <#fatalError()#>
             }
         }
     }
