@@ -39,7 +39,7 @@
                             <button key="customView" opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" id="DXS-ju-I4q">
                                 <rect key="frame" x="20" y="7" width="92" height="30"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
-                                <state key="normal" title="Download"/>
+                                <state key="normal" title="Logout"/>
                                 <connections>
                                     <action selector="downloadButtonPressed:" destination="BYZ-38-t0r" eventType="touchUpInside" id="lUY-wK-Mm4"/>
                                 </connections>
