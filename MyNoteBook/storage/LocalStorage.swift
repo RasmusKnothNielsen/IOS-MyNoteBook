@@ -8,7 +8,7 @@
 
 import Foundation
 
-class Storage{
+class LocalStorage{
     private static var _list = read()
     
     static var filename = "MyNoteBook.txt"

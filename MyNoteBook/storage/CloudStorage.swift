@@ -8,24 +8,76 @@
 
 import Foundation
 import FirebaseFirestore
+import FirebaseStorage
 
 class CloudStorage {
     
     private static var list = [Note]()
     private static let db = Firestore.firestore()
+    private static let storage = Storage.storage()
     private static let collectionName = "notes"
+    
+    // Download an image
+    static func downloadImage(name:String, iv:UIImageView) {
+        let imgRef = storage.reference(withPath: name)
+        imgRef.getData(maxSize: 40000000) { (data, error) in
+            if (error) == nil {
+                print("success downloading image!")
+                let img = UIImage(data: data!)
+                DispatchQueue.main.async {      // Prevent background thread from
+                    // interrupting the main thread, which handles user input
+                    iv.image = img    // Put the image inside the imageView
+                }
+            } else {
+                print("Some error downloading \(error.debugDescription)")
+            }
+        }
+    }
+    
+    // Upload an image
+    static func uploadImage(name:String, image:UIImage) {
+        // Create a root reference
+        let storageRef = storage.reference()
+        // Create a reference for image
+        let imageRef = storageRef.child(name + ".jpg")
+        
+        let img = image.jpegData(compressionQuality: 1.0)!
+        
+        let meta = StorageMetadata()
+        meta.contentType = "image/jpeg"
+        
+        _ = imageRef.putData(img, metadata: meta) { (metadata, error) in
+            guard let metadata = metadata else {
+                // Something went wrong
+                print("Meta data went wrong")
+                return
+            }
+            // Metadata contains file metadata such as size, content-type
+            _ = metadata.size
+            // You can also access to download URL after upload.
+            storageRef.downloadURL { (url, error) in
+                guard url != nil else {
+                    // Something went wrong
+                    print("URL went wrong")
+                    return
+                }
+            }
+        }
+        
+    }
     
     // CRUD
     
     // Create
-    static func createNote(head: String, body: String) {
+    static func createNote(head:String, body:String, imageID:String) {
         
         let docRef = db.collection(collectionName).document()
-        let newNote = Note(id: docRef.documentID, head: head, body: body)
+        let newNote = Note(id: docRef.documentID, head: head, body: body, imageID: "Cliff.jpg")
         list.append(newNote)
         var map = [String:String]()
         map["head"] = head
         map["body"] = body
+        map["imageID"] = imageID
         docRef.setData(map)
         
     }
@@ -40,8 +92,9 @@ class CloudStorage {
                     let map = note.data()
                     let head = map["head"] as! String
                     let body = map["body"] as! String
+                    let imageID = map["imageID"] as? String
                     // Creating the new node object
-                    let newNote = Note(id: note.documentID, head: head, body: body)
+                    let newNote = Note(id: note.documentID, head: head, body: body, imageID: imageID ?? "")
                     // Add it to the list
                     self.list.append(newNote)
                 }
@@ -62,8 +115,9 @@ class CloudStorage {
                     let map = note.data()
                     let head = map["head"] as! String
                     let body = map["body"] as! String
+                    let imageID = map["imageID"] as! String?
                     // Creating the new node object
-                    let newNote = Note(id: note.documentID, head: head, body: body)
+                    let newNote = Note(id: note.documentID, head: head, body: body, imageID: imageID ?? "")
                     // Add it to the list
                     self.list.append(newNote)
                 }
@@ -74,13 +128,14 @@ class CloudStorage {
     }
     
     // Update
-    static func updateNote(index:Int, head:String, body:String) {
+    static func updateNote(index:Int, head:String, body:String, imageID:String) {
         let note = list[index]
         //let newNote = Note(id: note.id, head: head, body: body)
         let docRef = db.collection(collectionName).document(note.id)
         var map = [String:String]()
         map["head"] = head
         map["body"] = body
+        map["imageID"] = imageID
         docRef.setData(map)
     }
     

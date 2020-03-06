@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func userPressedAddHeadline(_ sender: UIButton) {
         print("Button pressed")
-        CloudStorage.createNote(head: "New Note", body: "New Body")
+        CloudStorage.createNote(head: "New Note", body: "New Body", imageID: "default.jpg")
         tableView.reloadData()
     }
     
@@ -36,7 +36,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     let file = "MyNoteBook.txt";
     
     // String to contain the item that we press, when shifting to new page
-    var currentNote: Note = Note(id: "",head: "",body: "");
+    var currentNote: Note = Note(id: "",head: "",body: "", imageID: "");
     
     override func viewDidLoad()
     {
@@ -119,6 +119,10 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         self.tableView.deleteRows(at: [indexPath], with: .automatic)
       }
     }
+    
+    //@IBAction func downloadButtonPressed(_ sender: UIButton) {
+    //    CloudStorage.downloadImage(name: "Sidney.jpg")
+    //}
     
     // Function used to get the correct location on the operating system
     func getDocumentDir() -> URL
