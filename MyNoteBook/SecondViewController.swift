@@ -16,9 +16,6 @@ class SecondViewController: UIViewController {
     @IBOutlet weak var imageView: UIImageView!
     @IBOutlet weak var imageName: UITextField!
     
-    // Play time, delete when not needed anymore
-    var arrayOfImageNames = [String]()
-    
     var text = ""
 
     override func viewDidLoad() {
@@ -27,13 +24,6 @@ class SecondViewController: UIViewController {
         let newNote = CloudStorage.getNote(index: rowThatIsBeingEdited)
         headText.text = newNote.head
         bodyText.text = newNote.body
-        
-        // Used to play around with random pictures
-        arrayOfImageNames.append("Boots.jpg")
-        arrayOfImageNames.append("Cliff.jpg")
-        arrayOfImageNames.append("Port.jpg")
-        arrayOfImageNames.append("Sidney.jpg")
-        arrayOfImageNames.append("Koala.jpg")
         
         CloudStorage.downloadImage(name: newNote.imageID, iv: self.imageView)
         print("Row that is being edited: \(rowThatIsBeingEdited)")
@@ -60,11 +50,10 @@ class SecondViewController: UIViewController {
         print("User pressed upload")
         AttachmentHandler.shared.showAttachmentActionSheet(vc: self)
         AttachmentHandler.shared.imagePickedBlock = { (image) in
-            print("user chose image")
+            print("user choose Photo Library")
             self.imageView.image = image
             self.imageName.text = UUID().uuidString
             print(self.imageName.text!)
-            
         }
     }
     
