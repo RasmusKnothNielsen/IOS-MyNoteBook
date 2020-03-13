@@ -27,6 +27,11 @@ class Note {
         self.imageID = imageID
     }
     
+    // Check if there is an image in the note
+    func hasImage() -> Bool {
+        return imageID.count > 0
+    }
+    
     
     
 }

@@ -27,6 +27,43 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                         </tableViewCellContentView>
                                     </tableViewCell>
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" insetsLayoutMarginsFromSafeArea="NO" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="cell2" rowHeight="250" id="fOP-2w-7St" customClass="TableViewCellTextAndImage" customModule="MyNoteBook" customModuleProvider="target">
+                                        <rect key="frame" x="0.0" y="71.5" width="414" height="250"/>
+                                        <autoresizingMask key="autoresizingMask"/>
+                                        <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" insetsLayoutMarginsFromSafeArea="NO" tableViewCell="fOP-2w-7St" id="HcX-jW-Nfz">
+                                            <rect key="frame" x="0.0" y="0.0" width="414" height="250"/>
+                                            <autoresizingMask key="autoresizingMask"/>
+                                            <subviews>
+                                                <imageView clipsSubviews="YES" userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="dei-PL-gOb">
+                                                    <rect key="frame" x="20" y="36" width="160" height="178"/>
+                                                </imageView>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="aqf-sl-lkf">
+                                                    <rect key="frame" x="211" y="83" width="183" height="85"/>
+                                                    <constraints>
+                                                        <constraint firstAttribute="width" constant="183" id="YB9-xX-pUs"/>
+                                                        <constraint firstAttribute="height" constant="85" id="YHL-IV-HbI"/>
+                                                    </constraints>
+                                                    <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                                    <nil key="textColor"/>
+                                                    <nil key="highlightedColor"/>
+                                                </label>
+                                            </subviews>
+                                            <constraints>
+                                                <constraint firstItem="aqf-sl-lkf" firstAttribute="leading" secondItem="dei-PL-gOb" secondAttribute="trailing" constant="31" id="A5A-WB-MhZ"/>
+                                                <constraint firstItem="dei-PL-gOb" firstAttribute="top" secondItem="HcX-jW-Nfz" secondAttribute="topMargin" constant="25" id="HHE-AA-oDK"/>
+                                                <constraint firstItem="dei-PL-gOb" firstAttribute="leading" secondItem="HcX-jW-Nfz" secondAttribute="leadingMargin" id="IQh-UW-WTt"/>
+                                                <constraint firstItem="aqf-sl-lkf" firstAttribute="leading" secondItem="dei-PL-gOb" secondAttribute="trailing" constant="31" id="KEd-5q-soh"/>
+                                                <constraint firstItem="aqf-sl-lkf" firstAttribute="trailing" secondItem="HcX-jW-Nfz" secondAttribute="trailingMargin" id="WXi-ah-xdz"/>
+                                                <constraint firstItem="aqf-sl-lkf" firstAttribute="top" secondItem="HcX-jW-Nfz" secondAttribute="topMargin" constant="72" id="WgD-nF-kTU"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="dei-PL-gOb" secondAttribute="bottom" constant="25" id="pQU-l8-QcF"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="aqf-sl-lkf" secondAttribute="bottom" constant="71" id="tot-Dc-Dds"/>
+                                            </constraints>
+                                        </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="myImageView" destination="dei-PL-gOb" id="1Kw-oR-aYC"/>
+                                            <outlet property="myLabel" destination="aqf-sl-lkf" id="RBf-D7-UT8"/>
+                                        </connections>
+                                    </tableViewCell>
                                 </prototypes>
                             </tableView>
                         </subviews>

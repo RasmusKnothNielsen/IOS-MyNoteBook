@@ -61,7 +61,7 @@ class CloudStorage {
     static func createNote(head:String, body:String, imageID:String) {
         
         let docRef = db.collection(collectionName).document()
-        let newNote = Note(id: docRef.documentID, head: head, body: body, imageID: "Cliff.jpg")
+        let newNote = Note(id: docRef.documentID, head: head, body: body, imageID: "")
         list.append(newNote)
         var map = [String:String]()
         map["head"] = head

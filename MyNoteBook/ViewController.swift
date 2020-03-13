@@ -17,7 +17,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
 
     @IBAction func userPressedAddHeadline(_ sender: UIButton) {
         print("Button pressed")
-        CloudStorage.createNote(head: "New Note", body: "New Body", imageID: "default.jpg")
+        CloudStorage.createNote(head: "New Note", body: "New Body", imageID: "")
         tableView.reloadData()
     }
     
@@ -65,15 +65,30 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     // If there is two Strings in the array, the following function will be called twice.
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell
     {
-        // De-queue one of the cells from the our ReusableCells, so we can reuse cells
-        // in our memory. This provides us with the ability to scroll through alot of
-        // cells, without filling out the system memory unnecessary.
-        let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
-        // Assign string from textArray to the cell
-        let note = CloudStorage.getNote(index: indexPath.row)
-        cell?.textLabel?.text = note.head
-        // return the cell, and unwrap it with the !, since it is an Optional
-        return cell!
+        // If the note has an image, display it in the cell in our TableView
+        if CloudStorage.getNote(index: indexPath.row).hasImage() {
+            if let cell = tableView.dequeueReusableCell(withIdentifier: "cell2") as? TableViewCellTextAndImage {
+                let note = CloudStorage.getNote(index: indexPath.row)
+                cell.myLabel?.text = note.head
+                print(note.head)
+                CloudStorage.downloadImage(name: note.imageID, iv: cell.myImageView)
+                return cell
+            }
+            
+        }
+        else {
+            // De-queue one of the cells from the our ReusableCells, so we can reuse cells
+            // in our memory. This provides us with the ability to scroll through alot of
+            // cells, without filling out the system memory unnecessary.
+            let cell = tableView.dequeueReusableCell(withIdentifier: "cell1")
+            // Assign string from textArray to the cell
+            let note = CloudStorage.getNote(index: indexPath.row)
+            cell?.textLabel?.text = note.head
+            // return the cell, and unwrap it with the !, since it is an Optional
+            return cell!
+        }
+        // If everything fails, return an empty cell
+        return UITableViewCell()
     }
     
     // This enables the transition from tableview to the view controller
@@ -129,6 +144,12 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
     {
         let documentDir = FileManager.default.urls(for: .documentDirectory, in: .userDomainMask)
         return documentDir[0]
+    }
+    
+    // Control the height of the cell
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        // If the story has an image, return 250, else return 80
+        return CloudStorage.getNote(index: indexPath.row).hasImage() ? 250 : 80
     }
 }
 

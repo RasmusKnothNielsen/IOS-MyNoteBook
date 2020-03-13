@@ -24,8 +24,10 @@ class SecondViewController: UIViewController {
         let newNote = CloudStorage.getNote(index: rowThatIsBeingEdited)
         headText.text = newNote.head
         bodyText.text = newNote.body
-        
-        CloudStorage.downloadImage(name: newNote.imageID, iv: self.imageView)
+        // Check if note has image. If so, download it.
+        if newNote.hasImage() {
+            CloudStorage.downloadImage(name: newNote.imageID, iv: self.imageView)
+        }
         print("Row that is being edited: \(rowThatIsBeingEdited)")
         print()
         
@@ -36,13 +38,18 @@ class SecondViewController: UIViewController {
         print("Pressed the save button")
         print(headText.text!)
         print(rowThatIsBeingEdited)
-        let fullImageName = (imageName.text ?? "default") + ".jpg"
+        var fullImageName = (imageName.text ?? "")
+        // If image has been set, append .jpg to the title, else leave it blank
+        if fullImageName.count > 0 {
+            fullImageName += ".jpg"
+        }
         _ = CloudStorage.getNote(index: rowThatIsBeingEdited)
         CloudStorage.updateNote(index: rowThatIsBeingEdited, head: headText.text, body: bodyText.text, imageID: fullImageName )
         print("Image name is now: \(imageName.text!)")
-        print(imageView.image!)
-        // Upload the picture from the imageView if it differs from before.
-        CloudStorage.uploadImage(name: imageName.text!, image: imageView.image!)
+        // Upload the picture from the imageView if it exists
+        if fullImageName.count > 0 {
+            CloudStorage.uploadImage(name: imageName.text!, image: imageView.image!)
+        }
         
     }
 

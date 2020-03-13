@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		5950090A240905D100C33181 /* LocalStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59500909240905D100C33181 /* LocalStorage.swift */; };
+		5959A345241B88ED000E9E2D /* TableViewCellTextAndImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5959A344241B88ED000E9E2D /* TableViewCellTextAndImage.swift */; };
 		59CB473924093C0C00AE5A87 /* CloudStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB473824093C0C00AE5A87 /* CloudStorage.swift */; };
 		59CB473C24093CC800AE5A87 /* Note.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59CB473B24093CC800AE5A87 /* Note.swift */; };
 		59D4F6EF2412598600065727 /* AttachmentHandler.swift in Sources */ = {isa = PBXBuildFile; fileRef = 59D4F6EE2412598600065727 /* AttachmentHandler.swift */; };
@@ -26,6 +27,7 @@
 		3419A27BC4287E0F4748267A /* Pods-MyNoteBook.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-MyNoteBook.debug.xcconfig"; path = "Target Support Files/Pods-MyNoteBook/Pods-MyNoteBook.debug.xcconfig"; sourceTree = "<group>"; };
 		350781B0ABCE64FB8007A32C /* Pods_MyNoteBook.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_MyNoteBook.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		59500909240905D100C33181 /* LocalStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalStorage.swift; sourceTree = "<group>"; };
+		5959A344241B88ED000E9E2D /* TableViewCellTextAndImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TableViewCellTextAndImage.swift; sourceTree = "<group>"; };
 		59CB473824093C0C00AE5A87 /* CloudStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CloudStorage.swift; sourceTree = "<group>"; };
 		59CB473B24093CC800AE5A87 /* Note.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Note.swift; sourceTree = "<group>"; };
 		59D4F6EE2412598600065727 /* AttachmentHandler.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AttachmentHandler.swift; sourceTree = "<group>"; };
@@ -115,6 +117,7 @@
 				59DCB23A23F6868B009F4B2D /* SceneDelegate.swift */,
 				59DCB23C23F6868B009F4B2D /* ViewController.swift */,
 				59DCB25224000A77009F4B2D /* SecondViewController.swift */,
+				5959A344241B88ED000E9E2D /* TableViewCellTextAndImage.swift */,
 				59DCB23E23F6868B009F4B2D /* Main.storyboard */,
 				59DCB24123F6868B009F4B2D /* Assets.xcassets */,
 				59DCB24323F6868B009F4B2D /* LaunchScreen.storyboard */,
@@ -253,6 +256,7 @@
 				59DCB23D23F6868B009F4B2D /* ViewController.swift in Sources */,
 				59CB473C24093CC800AE5A87 /* Note.swift in Sources */,
 				59DCB23923F6868B009F4B2D /* AppDelegate.swift in Sources */,
+				5959A345241B88ED000E9E2D /* TableViewCellTextAndImage.swift in Sources */,
 				59CB473924093C0C00AE5A87 /* CloudStorage.swift in Sources */,
 				59D4F6EF2412598600065727 /* AttachmentHandler.swift in Sources */,
 				59DCB23B23F6868B009F4B2D /* SceneDelegate.swift in Sources */,
