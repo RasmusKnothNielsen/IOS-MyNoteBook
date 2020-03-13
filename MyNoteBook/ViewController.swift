@@ -19,6 +19,7 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("Button pressed")
         CloudStorage.createNote(head: "New Note", body: "New Body", imageID: "")
         tableView.reloadData()
+        // Go directly into the newly created note
         // Transfer the text from the row to the user input field
         rowThatIsBeingEdited = CloudStorage.count() - 1;
         let secondViewController: SecondViewController = SecondViewController()
