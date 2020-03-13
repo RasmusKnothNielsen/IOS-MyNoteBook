@@ -19,6 +19,18 @@ class ViewController: UIViewController, UITableViewDataSource, UITableViewDelega
         print("Button pressed")
         CloudStorage.createNote(head: "New Note", body: "New Body", imageID: "")
         tableView.reloadData()
+        // Transfer the text from the row to the user input field
+        rowThatIsBeingEdited = CloudStorage.count() - 1;
+        let secondViewController: SecondViewController = SecondViewController()
+        print("Now we are in ViewController")
+        print("IndexPath.row is: \(rowThatIsBeingEdited)")
+        print()
+        let note = CloudStorage.getNote(index: rowThatIsBeingEdited)
+        secondViewController.text = note.head
+        performSegue(withIdentifier: "showDetail", sender: nil)
+        // Set editing to true
+        editingRow = true;
+        
     }
     
     
