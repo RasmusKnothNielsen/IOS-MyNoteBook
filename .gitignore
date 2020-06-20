@@ -5,8 +5,6 @@
 */GoogleService-Info.plist
 
 # Pods
-Podfile
-Podfile.lock
 Pods/
 
 ## User settings
